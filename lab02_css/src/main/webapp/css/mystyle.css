@@ -10,11 +10,11 @@ selector {
  */
  
  body {
-    background-color: pink;
+    background-color: #D58EFA;
  }
  
  div {
-    border: 8px solid pink; 
+    border: 8px solid black; 
     /* 테두리선 두께(width), 종류(style), 색깔(color) */
     margin: 16px;
     /* 테두리선(border) 바깥 여백 */
