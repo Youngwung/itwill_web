@@ -10,14 +10,19 @@ selector {
  */
  
  body {
-    background-color: #D58EFA;
+    background-color: lightgray;
  }
  
  div {
-    border: 8px solid black; 
+    border: 2px solid white; 
     /* 테두리선 두께(width), 종류(style), 색깔(color) */
-    margin: 16px;
+    margin: 8px;
     /* 테두리선(border) 바깥 여백 */
     padding: 16px;
     /* 테두리선 안쪽 여백 */
  }
+
+ 
+ 
+ 
+ 
