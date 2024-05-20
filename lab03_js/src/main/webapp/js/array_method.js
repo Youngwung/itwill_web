@@ -53,7 +53,7 @@ console.log(arr2);
 
 
 // filter, map, forEach, reduce:
-const numbers = [1, 2, 3, 4, 5];
+const numbers = [1, 2, 3, 4, 5, 6];
 
 // 배열 numbers의 원소들 중에서 홀수들로만 이루어진 새로운 배열
 const odds = [];
@@ -91,8 +91,38 @@ console.log(result);
 numbers.forEach((x) => console.log(x));
 
 
+// 배열 numbers의 모든 원소들의 합계
+let sum = 0;
+for (let value of numbers) {
+    sum += value; // sum = sum + value;
+}
 
+console.log(`sum = ${sum}`);
 
+sum = numbers.reduce((acc, cur) => acc + cur, 0);
+console.log(`sum = ${sum}`);
+// reduce(callback, initialValue)
+// 0은 sum = 0 => 초기화값, acc = acc + cur, cur는 배열의 원소, 
+
+// numbers의 모든 원소들의 곱:
+let dot = 1;
+for (value of numbers) {
+    dot *= value;
+}
+console.log(`dot = ${dot}`);
+
+dot = numbers.reduce((acc, cur) => acc * cur, 1);
+console.log(`dot = ${dot}`);
+
+// numbers의 원소들 중에서 짝수들의 합: 2+4+6
+result = numbers.filter((x) => x % 2 === 0).reduce((acc, cur) => acc + cur, 0);
+console.log(`짝수 합 = ${result}`);
+// numbers의 원소들의 제곱의 합: 1 + 4 + 9 + .. + 36
+result = numbers.map((x) => (x * x)).reduce((acc, cur) => acc + cur, 0);
+console.log(`제곱 합 = ${result}`);
+// numbers의 원소들 중에서 짝수들의 제곱의 합: 4 + 16 + 36
+result = numbers.filter((x) => x % 2 === 0).map((x) => x * x).reduce((acc, cur) => acc + cur, 0);
+console.log(`짝수 제곱 합 = ${result}`);
 
 
 
