@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>난수출력</title>
+	</head>
+	<body>
+		<nav>
+            <h1>0~100까지의 난수 출력</h1>
+        </nav>
+        <main>
+            <button id="btn" onclick="getRandom()">난수 생성</button>
+            <div id='result'>결과</div>
+        </main>
+        <script>
+            const result = document.getElementById('result');
+            function getRandom() {
+                result.innerHTML = Math.round(Math.random()*10000)/100;
+            }
+        </script>
+	</body>
+</html>
