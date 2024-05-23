@@ -37,6 +37,15 @@
             <li>
                <a href ="form.jsp">폼 양식</a>
             </li>
+            <li>
+               <a href ="actiontag.jsp">JSP Action Tag</a>
+            </li>
+            <li>
+               <a href ="el.jsp">EL(Expression Language, 표현식 언어)</a>
+            </li>
+            <li>
+               <a href ="jstl.jsp">JSTL</a>
+            </li>
 
         </ul>
     </main>
