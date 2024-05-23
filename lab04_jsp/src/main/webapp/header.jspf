@@ -1,0 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<nav>
+<!-- 메인의 일부분이 될 거기 때문에 선언문 제외하고 다 지워도 됨.
+    확장자.jsp를 .jspf로 두어 다른 jsp파일에 속하는 파일임을 알려주는 것도 좋은 방법임.
+ -->
+    <a href="/lab04">인덱스 페이지</a>
+</nav>
