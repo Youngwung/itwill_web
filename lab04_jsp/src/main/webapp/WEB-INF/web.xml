@@ -14,5 +14,4 @@
     <servlet-name>fistServlet</servlet-name>
     <url-pattern>/ex1</url-pattern>
   </servlet-mapping>
-
 </web-app>
