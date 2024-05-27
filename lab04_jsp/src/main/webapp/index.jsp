@@ -56,6 +56,14 @@
             <li>
                <a href ="session">Session</a>
             </li>
+            <li>
+               <p>Filter는 jsp없음. FilterEx.java 참고하셈</p>
+               <p>서블릿에 도착하는 요청에 조건문을 걸 수 있음.</p>
+            </li>
+            <li>
+               <p>Lister도 jsp없음. ListenerEx.java참고하셈</p>
+               <p>세션 생성 등의 서버에서 이벤트가 일어났을 때 할 일이 있으면 이거 써야됨.</p>
+            </li>
 
         </ul>
     </main>
