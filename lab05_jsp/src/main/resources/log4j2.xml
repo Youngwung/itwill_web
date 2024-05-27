@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-    <Appenders>
-        <console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern = "%d{HH:mm:ss.SSS} %-5p [%-40.40logger] %m%n" />
-            <!-- 콘솔에 쓸 패턴을 지정하는 태그
-                 target="SYSTEM_OUT" 자바의 System.out을 이용해서 콘솔에 출력하겠다는 세팅
-                 %d{} 는 날짜(day) 출력패턴 설정
-                 %-5p는 왼쪽부터 5글자 출력
-                 [%-40.40logger]는 로그 메세지 40칸 출력
-                 %m%n은 입력받은 문자 출력
-             -->
-        </console>
-    </Appenders>
-    <!-- 
-    로그 패턴:
-      o. %d, %date: 로그 출력 날짜/시간.
-      o. %p, %level: 로그 레벨. all < trace < debug < info < warm < error < fatal < off
-      o. %c, %logger: 로그를 출력하는 Logger 객체.
-      o. %m, %messae: 로그 메시지.
-      o. %n: 줄바꿈(new line).
-      o. %L, %line: 로그를 출력하는 소스 코드의 줄 번호.
-     -->
-    <Loggers>
-        <Logger name="com.zaxxer.hikari" level="info" additivity="false">
-            <AppenderRef ref="console" />
-        </Logger>
-        
-        <!-- Root는 무조건 있어야 하는 태그
-             level: debug레벨 이상의 로그만 출력
-             additivity: 중복되는 로그를 출력할래? false => 중복출력안함
-         -->
-        <Root level="trace" additivity="false">
-            <AppenderRef ref="console" />
-        </Root>
-    </Loggers>
+  <Appenders>
+    <console name="console" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="%d{HH:mm:ss.SSS} %-5p [%-40.40logger] %m%n" />
+      <!-- 콘솔에 쓸 패턴을 지정하는 태그 target="SYSTEM_OUT" 자바의 System.out을 이용해서 콘솔에 
+        출력하겠다는 세팅 %d{} 는 날짜(day) 출력패턴 설정 %-5p는 왼쪽부터 5글자 출력 [%-40.40logger]는 로그 메세지 
+        40칸 출력 %m%n은 입력받은 문자 출력 -->
+    </console>
+  </Appenders>
+  <!-- 로그 패턴: o. %d, %date: 로그 출력 날짜/시간. o. %p, %level: 로그 레벨. all < trace 
+    < debug < info < warm < error < fatal < off o. %c, %logger: 로그를 출력하는 Logger 
+    객체. o. %m, %messae: 로그 메시지. o. %n: 줄바꿈(new line). o. %L, %line: 로그를 출력하는 
+    소스 코드의 줄 번호. -->
+  <Loggers>
+    <Logger name="com.zaxxer.hikari" level="info"
+      additivity="false">
+      <AppenderRef ref="console" />
+    </Logger>
+ 
+    <!-- Root는 무조건 있어야 하는 태그 level: info레벨 이상의 로그만 출력 additivity: 중복되는 로그를 
+      출력할래? false => 중복출력안함 -->
+    <Root level="trace" additivity="false">
+      <AppenderRef ref="console" />
+    </Root>
+  </Loggers>
 </Configuration>
