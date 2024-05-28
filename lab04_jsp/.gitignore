@@ -6,6 +6,8 @@
 *.class
 *.classpath
 *.project
+*/.settings or */.settings/**
+
 # Log file
 *.log
 
