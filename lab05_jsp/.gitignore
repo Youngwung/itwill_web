@@ -8,6 +8,7 @@
 *.project
 */.settings or */.settings/**
 */target or */target/**
+.target
 
 # Log file
 *.log
