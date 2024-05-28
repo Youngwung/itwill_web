@@ -7,9 +7,8 @@
 *.classpath
 *.project
 */.settings or */.settings/**
-*/target or */target/*
-.target
 .target/*
+.target/classes/*
 
 # Log file
 *.log
