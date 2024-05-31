@@ -33,7 +33,7 @@ uri="jakarta.tags.core"%>
                                 placeholder="아이디" required autofocus />
                             </div>
                             <div class="mt-2">
-                                <input class="form-control" type="text" name="password"
+                                <input class="form-control" type="password" name="password"
                                 placeholder="비밀번호" required autofocus />
                             <div class="mt-2">
                                 <input class="form-control" type="text" name="email"
