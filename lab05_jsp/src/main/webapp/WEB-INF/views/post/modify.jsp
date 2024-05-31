@@ -26,13 +26,13 @@
           <h2>포스트 수정 페이지</h2>
         </div>
         <div class="card-body">
-          <form>
-            <%-- TODO form 작성. --%>
+          <form id="modifyForm">
+            <%-- form 작성. --%>
             <div class="mt-2">
               <label for="id" class="form-label">번호</label>
               <%-- for: 다른 html 태그에 id 속성 값을 찾음 --%>
               <input id="id" class="form-control" type="text"
-                value="${post.id}" readonly />
+                name = "id" value="${post.id}" readonly />
               <%-- for의 대상. value에 EL로 가져온 post의 id를 써 input에 표시되게한다.
               여기서 EL로 id를 가져올 수 있었던 건 PostDetailsController에서 req.setAttribute("post", post)로 
               보내주었기 때문에 사용할 수 있었던 것.  --%>
@@ -41,14 +41,14 @@
               <label for="title" class="form-label">제목</label>
               <%-- for: 다른 html 태그에 id 속성 값을 찾음 --%>
               <input id="title" class="form-control" type="text"
-                value="${post.title}" />
+                name = "title" value="${post.title}" />
             </div>
             <div class="mt-2">
               <label for="content" class="form-label">내용</label>
-              <textarea id="content" class="form-control" rows="5"
+              <textarea id="content" class="form-control" rows="5" name="content"
                 >${post.content}</textarea>
             </div>
-            <div class="mt-2">
+            <div class="mt-2 d-none">
               <label for="author" class="form-label">작성자</label>
               <input id="author" class="form-control" type="text"
                 value="${post.author}" readonly />
@@ -57,7 +57,10 @@
         </div>
         <div class="card-footer">
           <button id="btnDelete" class = "btn btn-outline-danger">삭제</button>
-          <%-- 버튼으로 만든 이유가 삭제 버튼을 눌렀을 때 새로운 창을 띄우고 사용자에게 
+          <%-- 버튼은 form안에 있으면 아무런 기능을 주지 않아도 자동으로 form액선 안에 주소로
+          요청을 보낸다. form밖에 만들면 이벤트 핸들러가 등록되지 않으면 아무런 기능이 없어진다.
+          우리가 원하는 기능으로 만들기 위해 form밖에 버튼을 만들었다.
+          버튼으로 만든 이유가 삭제 버튼을 눌렀을 때 새로운 창을 띄우고 사용자에게 
           확인을 한번 받는 기능을 구현하려고 하는건데
           그것은 자바스크립트로 구현해야한다. 
           그래서 자바스크립트로 컨트롤 할 수 있는 태그인 버튼으로 한 것이다. --%>
@@ -71,5 +74,13 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
     crossorigin="anonymous"></script>
+  <%--
+  <c:url var="post_modify_js" value="/js/post_modify.js" />
+  <script src="${post_modify_js}"></script>
+       경로같은거 헷갈리면 이런식으로 써도 될거같음  
+       c:url태그안의 value는 맨 앞 /가 webapp/이라고 생각하면 됨.  
+  --%>
+  <script src="../js/post_modify.js">
+  </script>
 </body>
 </html>

@@ -20,7 +20,7 @@
   여기에 넣은게 맨 위에 표시됨 -->
     <c:set var="pageTitle" value="New post" scope="page" />
     <%@ include file="../fragments/header.jspf"%>
-    <!--TODO: 제목> 내용> 작성자> 저장버튼 만들기. -->
+    <!-- 제목> 내용> 작성자> 저장버튼 만들기. -->
     <main>
       <div class="mt-2 card">
         <div class="card-header">

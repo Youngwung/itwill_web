@@ -49,4 +49,22 @@ public enum PostService {
 		// *얘는 컨트롤러가 호출함. PostDetailsController.java
 	}
 
+	public int delete(int id) {
+		log.debug("delete(id={})", id);
+		int result = postDao.delete(id);
+		log.debug("delete result = {}", result);
+
+		return result;
+	}
+
+	public int update(Post post) {
+		log.debug("update({})", post);
+
+		// 영속성 계층의 메서드를 호출해서 DB posts 테이블을 update.
+		int result = postDao.update(post);
+		log.debug("update result = {}", result);
+
+		return result;
+	}
+
 }
