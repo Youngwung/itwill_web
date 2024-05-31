@@ -20,7 +20,6 @@ public class UserSignUpController extends HttpServlet {
 
   private final UserService userService = UserService.INSTANCE;
 
-  // TODO: 회원 가입에 필요한 요청 처리 메서드.
   // 회원 가입에 필요한 요청 처리 메서드.
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +31,6 @@ public class UserSignUpController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    // TODO: 회원가입 버튼 눌렀을 때 요청 처리할 메서드.
     log.debug("doPost()");
     String id = req.getParameter("userid");
     String password = req.getParameter("password");
