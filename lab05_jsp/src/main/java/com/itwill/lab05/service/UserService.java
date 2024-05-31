@@ -22,4 +22,14 @@ public enum UserService {
     log.debug("insert result = {}", result);
     return result;
   }
+
+  public User signIn(String userid, String password) {
+    log.debug("signIn({userid={}, password={})", userid, password);
+    // DTO(Data Transfer Object)
+    User dto = User.builder().userid(userid).password(password).build();
+    User user = userDao.selectByUserIdAndPassword(dto);
+    log.debug("로그인 결과 = {}", user);
+
+    return user;
+  }
 }
