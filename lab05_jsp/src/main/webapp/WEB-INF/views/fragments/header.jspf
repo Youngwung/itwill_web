@@ -26,14 +26,33 @@
                     <c:url var="newPostPage" value="/post/create" />
                     <a class="nav-link" href="${newPostPage}">New Post</a>
                 </li>
+                
+                <%-- not empty ==> null이 아니고 빈 문자열("")도 아닌 경우 true
+                not null and length > 0
+                empty ==> null or length = 0 --%>
+                <c:if test="${not empty signedInUser}">
+                  <%-- 로그인 정보가 세션에 저장된 경우. --%>
+                  <li class="nav-item">
+                    <c:url var="signOutPage" value = "/user/signout"/>
+                      <a class="nav-link" href="${signOutPage}">
+                        <span>${signedInUser}</span>로그아웃
+                      </a>
+                  </li>
+                </c:if>
+                <c:if test="${empty signedInUser}">
+                <%-- 세션에 로그인 정보가 없는 경우. --%>
                 <li class="nav-item">
                     <c:url var="userSignIn" value="/user/signin"/>
+                    
+                    
+                    
                     <a class="nav-link" href="${userSignIn}">로그인</a>
                 </li>
                 <li class="nav-item">
                     <c:url var="userSignUp" value = "/user/signup" />
                     <a class="nav-link" href="${userSignUp}">회원가입</a>
                 </li>
+                </c:if>
             </ul>
         </div>
     </div>
