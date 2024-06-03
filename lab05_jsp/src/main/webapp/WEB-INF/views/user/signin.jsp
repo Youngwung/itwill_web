@@ -22,7 +22,7 @@ uri="jakarta.tags.core"%>
 			</div>
 			<div class="card-body">
 				<c:url var="signInPage" value="/user/signin" />
-				<form method="post" action="">
+				<form method="post" action="${signInPage}">
 					<div class="mt-2">
 						<input
 							type="text"
@@ -33,6 +33,7 @@ uri="jakarta.tags.core"%>
 							autofocus
 						/>
 					</div>
+
 					<div class="mt-2">
 						<input
 							type="password"
@@ -44,6 +45,9 @@ uri="jakarta.tags.core"%>
 					</div>
 					<div class="mt-2">
 						<input type="submit" value="로그인" class="form-control" />
+					</div>
+					<div class="d-none">
+						<input name="target" value="${param.target}" readonly />
 					</div>
 				</form>
 			</div>
