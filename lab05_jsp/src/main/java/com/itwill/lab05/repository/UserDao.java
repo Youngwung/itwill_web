@@ -83,6 +83,55 @@ public enum UserDao {
     return result;
   }
 
+  final String SQL_SEARCH_BY_ID = "select * from users where userid = ?";
+
+  public User selectById(String userId) {
+    User user = null;
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+
+    try {
+      conn = ds.getConnection();
+      stmt = conn.prepareStatement(SQL_SEARCH_BY_ID);
+      stmt.setString(1, userId);
+      rs = stmt.executeQuery();
+      if (rs.next()) {
+        user = fromResultSetToUser(rs);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      closeResources(conn, stmt, rs);
+    }
+
+    return user;
+  }
+
+  final String SQL_ADD_POINTS = "update users set points = points + ? where userid = ?";
+
+  public int addPoints(String userId, int points) {
+    int result = 0;
+    log.debug("addPoints = {}", userId);
+    log.debug("user points = {}", points);
+    log.debug(SQL_ADD_POINTS);
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    try {
+      conn = ds.getConnection();
+      stmt = conn.prepareStatement(SQL_ADD_POINTS);
+      stmt.setInt(1, points);
+      stmt.setString(2, userId);
+      result = stmt.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      closeResources(conn, stmt);
+    }
+
+    return result;
+  }
+
   private void closeResources(Connection conn, PreparedStatement stmt, ResultSet rs) {
     try {
       if (rs != null)

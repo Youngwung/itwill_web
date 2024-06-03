@@ -32,4 +32,10 @@ public enum UserService {
 
     return user;
   }
+  public User read(String userId) {
+    log.debug("userId = {}", userId);
+    User user = userDao.selectById(userId);
+    return user;
+  }
+
 }
