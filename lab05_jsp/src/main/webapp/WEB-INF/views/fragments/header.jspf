@@ -35,7 +35,7 @@
                   <li class="nav-item">
                     <c:url var="signOutPage" value = "/user/signout"/>
                       <a class="nav-link" href="${signOutPage}">
-                        <span>${signedInUser}</span>로그아웃
+                        <span>${signedInUser}</span> 로그아웃
                       </a>
                   </li>
                 </c:if>
