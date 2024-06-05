@@ -134,6 +134,13 @@
             compile ==> 컴파일 할 때 롬복 라이브러리를 이용함. -->
       <scope>compile</scope>
     </dependency>
+
+    <!-- vscode에서 추가해봄 -->
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-jsp-api</artifactId>
+      <version>10.1.24</version>
+    </dependency>
   </dependencies>
   <!-- 빌드 툴(플러그인) 설정 -->
   <build>
