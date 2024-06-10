@@ -19,6 +19,8 @@
     <spring-version>6.1.8</spring-version>
     <jackson-version>2.17.1</jackson-version>
     <lombok-version>1.18.32</lombok-version>
+    <mybatis-version>3.5.16</mybatis-version>
+    <mybatis-spring-version>3.0.3</mybatis-spring-version>
   </properties>
   <!-- 프로젝트에서 필요한 의존성(라이브러리)들을 설정. -->
   <dependencies>
@@ -134,6 +136,35 @@
             compile ==> 컴파일 할 때 롬복 라이브러리를 이용함. -->
       <scope>compile</scope>
     </dependency>
+
+    <!-- Spring JDBC-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+    
+    <!-- Spring Tx(Transaction) SQL문장을 실행했을 때 자동으로 commit을 해주는 등
+     편의성을 제공해주는 라이브러리-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+
+      <!-- MyBatis SQL mapper framework-->
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis-version}</version>
+     </dependency>
+
+     <!-- An easy-to-use Spring bridge for MyBatis SQL mapper framework-->
+     <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatis-spring-version}</version>
+     </dependency>
 
     <!-- vscode에서 추가해봄 -->
     <dependency>
