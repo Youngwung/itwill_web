@@ -44,6 +44,22 @@ uri="jakarta.tags.core"%>
 						<c:url var="redirectPage" value="/testRedirect" />
 						<a href="${redirectPage}">리다이렉트</a>
 					</li>
+					<li>
+						<c:url var="rest1" value="/rest1" />
+						<a href="${rest1}">Rest 1</a>
+					</li>
+					<li>
+						<c:url var="rest2" value="/rest2" />
+						<a href="${rest2}">Rest 2</a>
+					</li>
+					<li>
+						<c:url var="rest3" value="/rest3" />
+						<a href="${rest3}">Rest Controller 3</a>
+					</li>
+					<li>
+						<c:url var="rest4" value="/rest4" />
+						<a href="${rest4}">Rest Controller 4</a>
+					</li>
 				</ul>
 			</nav>
 		</main>
