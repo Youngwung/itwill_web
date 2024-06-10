@@ -23,7 +23,6 @@ uri="jakarta.tags.core"%>
 			<!-- <img alt="집" src="./images/home.jpg" /> -->
 			<c:url var="home" value="/images/home.jpg" />
 			<img alt="집" src="${home}" />
-			<img alt="슬픈원숭이" src="/images/sadsadmonkey.gif" />
 		</header>
 		<main>
 			<h1>Contents</h1>
