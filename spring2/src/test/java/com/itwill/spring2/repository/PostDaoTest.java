@@ -28,4 +28,44 @@ public class PostDaoTest {
     }
   }
 
+  @Test
+  public void testSelectById() {
+    Post post1 = postDao.selectById(25); // DB 테이블에 id가 있는 경우
+    Assertions.assertNotNull(post1);
+    log.debug(post1.toString());
+
+    Post post2 = postDao.selectById(24); // DB 테이블에 id가 없는 경우
+    Assertions.assertNull(post2);
+  }
+
+  @Test
+  public void testInsert() {
+    // insert할 데이터
+    Post post = Post.builder()
+        .title("MyBatis 테스트")
+        .content("MyBatis-Spring insert 테스트")
+        .author("admin")
+        .build();
+    int result = postDao.insertPost(post);
+    Assertions.assertEquals(1, result);
+  }
+
+  @Test
+  public void testUpdate() {
+    Post post = Post.builder()
+        .id(1)
+        .title("MyBatis update 테스트")
+        .content("MyBatis-Spring update 테스트")
+        .author("admin")
+        .build();
+    int result = postDao.updatePost(post);
+    Assertions.assertEquals(1, result);
+  }
+
+  @Test
+  public void testDelete(){
+    int result = postDao.deletePost(102);
+    Assertions.assertEquals(1, result);
+  }
+
 }
