@@ -85,6 +85,12 @@ uri="jakarta.tags.core"%>
 						</div>
 					</form>
 				</div>
+				<div class="card-footer">
+					<c:url var="postModifyPage" value="/post/modify">
+						<c:param name="id" value="${post.id}"></c:param>
+					</c:url>
+					<a class="btn btn-primary" href="${postModifyPage}">수정하기</a>
+				</div>
 			</div>
 		</main>
 		<script
