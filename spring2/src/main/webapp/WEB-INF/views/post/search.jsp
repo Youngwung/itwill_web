@@ -16,7 +16,7 @@ uri="jakarta.tags.core"%>
 	</head>
 	<body>
 		<div class="container-fluid">
-			<c:set var="pageTitle" value="Post List" />
+			<c:set var="pageTitle" value="Search Result" />
 			<%@ include file="../fragments/header.jspf" %>
 		</div>
 		<main>
@@ -63,17 +63,17 @@ uri="jakarta.tags.core"%>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="p" items="${posts}">
+							<c:forEach var="r" items="${results}">
 								<tr>
-									<td>${p.id}</td>
+									<td>${r.id}</td>
 									<td>
 										<c:url var="postDetailPage" value="/post/detail">
-											<c:param name="id" value="${p.id}"></c:param>
+											<c:param name="id" value="${r.id}"></c:param>
 										</c:url>
-										<a href="${postDetailPage}">${p.title}</a>
+										<a href="${postDetailPage}">${r.title}</a>
 									</td>
-									<td>${p.author}</td>
-									<td>${p.modifiedTime}</td>
+									<td>${r.author}</td>
+									<td>${r.modifiedTime}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -24,7 +24,6 @@
       update posts set 
         title = #{title},
         content = #{content},
-        author = #{author},
         modified_time=systimestamp
         where id = #{id}
      </update>
@@ -34,4 +33,41 @@
       delete from posts where id = #{id}
      </delete>
 
+     <!-- posts 테이블에서 제목/내용/작성자로 검색. -->
+     <select id="search" resultType="Post">
+      <!-- 만들어야 할 sql 문장
+        select * from posts 
+        where upper(title) like upper('%tes%') 
+        order by id desc' 
+        ==> title 중에 대소문자 관계 없이 tes가 포함되어 있는 행 찾기.
+        like 검색 시 검색어 앞 뒤로 퍼센트를 붙여야 검색어가 포함되어있는 걸 찾음.
+      -->
+      <bind name="searchKeyword" value="'%' + keyword +'%'" />
+      select * from posts
+      <where>
+        <choose>
+          <!-- test 값의 ''안의 코드는 자바의 코드임.
+           자바의 코드에서 문자열은 ""로 함.
+           마크업 랭귀지(xml, html 등)은 구분은 안하므로
+           서로 다른걸로 묶어준겨 -->
+          <when test='category.equals("t")'>
+            upper(title) like upper(#{searchKeyword})
+          </when>
+          <when test='category.equals("c")'>
+            upper(content) like upper(#{searchKeyword})
+          </when>
+          <when test='category.equals("tc")'>
+                upper(title) like upper(#{searchKeyword})
+                or
+                upper(content) like upper(#{searchKeyword})
+          </when>
+          <when test='category.equals("a")'>
+            upper(author) like upper(#{searchKeyword})
+          </when>
+        </choose>
+      </where>
+      <!-- 조건에 따라 다른 쿼리를 실행하는 이런 구조를 동적 쿼리라고 함. -->
+       order by id desc
+     </select>
+     
   </mapper>
