@@ -42,14 +42,14 @@ uri="jakarta.tags.core"%>
 								id="title"
 								class="form-control"
 								type="text"
-								value="post.title"
+								value="${post.title}"
 								readonly
 							/>
 						</div>
 						<div class="mt-2">
 							<label for="content" class="form-label">내용</label>
 							<textarea id="content" class="form-control" rows="5" readonly>
-                ${post.content}
+${post.content}
 							</textarea
 							>
 						</div>
