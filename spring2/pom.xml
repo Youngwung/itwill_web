@@ -126,6 +126,12 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson-version}</version>
     </dependency>
+    <!-- Add-on module to support JSR-310 (Java 8 Date & Time API) data types -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${jackson-version}</version>
+    </dependency>
     <!-- Spice up your java: Automatic Resource Management, automatic generation
     of getters, setters, equals, hashCode and toString, and more! -->
     <dependency>
@@ -165,13 +171,6 @@
       <artifactId>mybatis-spring</artifactId>
       <version>${mybatis-spring-version}</version>
      </dependency>
-
-    <!-- vscode에서 추가해봄 -->
-    <dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>tomcat-jsp-api</artifactId>
-      <version>10.1.24</version>
-    </dependency>
   </dependencies>
   <!-- 빌드 툴(플러그인) 설정 -->
   <build>
