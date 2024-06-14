@@ -28,4 +28,14 @@
       delete from comments where post_id = #{postId}
     </delete>
 
+    <select id="selectCommentCount" resultType="Integer">
+      select count(id) from comments where post_id=#{postId}
+    </select>
+
+    <select id="selectById" resultType="Comment">
+      select * from comments where id = #{id} order by id desc
+    </select>
+
+
+
   </mapper>

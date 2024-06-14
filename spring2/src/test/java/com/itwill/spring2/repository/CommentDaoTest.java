@@ -65,4 +65,17 @@ public class CommentDaoTest {
     Assertions.assertEquals(2, result);
   }
 
+  @Test
+  public void selectCommentCount() {
+    int count = commentDao.selectCommentCount(121);
+    Assertions.assertEquals(3, count);
+  }
+
+  @Test
+  public void selectById() {
+    Comment comment = commentDao.selectById(6);
+    Assertions.assertNotNull(comment);
+    log.debug(comment.toString());
+  }
+
 }
