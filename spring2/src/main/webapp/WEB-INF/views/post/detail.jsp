@@ -93,10 +93,49 @@ ${post.content}
 				</div>
 			</div>
 		</main>
+		<section>
+			<div class="mt-2 card">
+				<div class="card-header d-inline-flex gap-1">
+					<!-- 댓글 접기/펼치기 기능 버튼 -->
+					<button class="btn btn-secondary" id="btnToggleComment">
+						댓글 보기
+					</button>
+				</div>
+				<!-- 댓글 토글 버튼에 의해서 접기/펼치기를 할 영역 -->
+				<div class="card-body collapse" id="collapseComments">
+					<!-- 댓글 등록 -->
+					<div class="mt-2 card card-body">
+						<div class="mt-2 row">
+							<div class="col-10">
+								<!-- 댓글 입력 부분 -->
+								<textarea
+									class="form-control"
+									id="ctext"
+									rows="3"
+									placeholder="댓글 내용"
+								></textarea>
+								<!-- 댓글 작성자 아이디: TODO: 로그인한 사용자의 아이디로 설정 -->
+								<input id="username" placeholder="댓글 작성자" />
+							</div>
+							<div class="col-2">
+								<button class="btn btn-outline-success" id="btnRegisterComment">
+									등록
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- 포스트에 달려 있는 댓글 목록을 보여줄 영역 -->
+					<div class="mt-2" id="comments">댓글 목록</div>
+				</div>
+			</div>
+		</section>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
 			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
 			crossorigin="anonymous"
 		></script>
+		<c:url var="commentsJS" value="/js/comments.js" />
+		<script src="${commentsJS}"></script>
 	</body>
 </html>
