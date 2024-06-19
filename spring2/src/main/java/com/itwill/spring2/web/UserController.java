@@ -55,6 +55,21 @@ public class UserController {
       return ResponseEntity.ok("N");
     }
   }
+
+  // 이메일 중복 체크 REST 컨트롤러
+  @GetMapping("/checkEmail")
+  @ResponseBody
+  public ResponseEntity<String> checkEamil(@RequestParam(name="email") String email) {
+    log.debug("checkEmail");
+    boolean result = userService.checkEmail(email);
+    if (result) {
+      return ResponseEntity.ok("Y");
+    } else {
+      return ResponseEntity.ok("N");
+    }
+  }
+  
+
   @GetMapping("/signin")
     public void signIn() {
         log.debug("GET signIn()");

@@ -20,4 +20,11 @@
       select * from users
       where userid = #{userid} and password = #{password}
     </select>
+
+    <!-- 이메일 중복 체크 -->
+     <select id="selectByEmail" resultType="User">
+      select * from users
+      where email = #{email}
+     </select>
+      
   </mapper>

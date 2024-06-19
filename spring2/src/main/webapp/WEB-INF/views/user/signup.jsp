@@ -33,6 +33,7 @@ uri="jakarta.tags.core"%>
            <div class="my-2">
              <input type="password" class="form-control" id="password" name="password" required placeholder="비밀번호 입력"/>
             </div>
+
             
             <!-- password 중복 체크 결과 표시할 영역 -->
              <div id="checkUseridResult"></div>
@@ -41,6 +42,10 @@ uri="jakarta.tags.core"%>
             <input type="email" class="form-control" id="email" name="email" placeholder="이메일" required>
            </div>
            
+           <!-- password 중복 체크 결과 표시할 영역 -->
+            <div id="checkEmailResult"></div>
+
+
            <div class="my-2">
              <button id="btnSignup" class="form-control btn btn-outline-success disabled">작성 완료</button>
            </div>
