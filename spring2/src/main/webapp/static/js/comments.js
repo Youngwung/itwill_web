@@ -154,17 +154,20 @@ document.addEventListener("DOMContentLoaded", () => {
 						<span class="fw-bold">${comment.username}</span>
 						<span class="text-secondary">${modifiedTime}</span> 
 					</div>
-					<div>${comment.ctext}</div>
-					<div>
+					<div>${comment.ctext}</div>`;
+			   // 댓글 작성자와 로그인 사용자 아이디가 같은 경우에만 삭제/수정 버튼을 추가.
+				if (comment.username === signedInUser) {
+					htmlStr += `<div>
 						<button class="btnDeleteComment btn btn-outline-danger btn-sm"
 							data-id="${comment.id}">삭제</button>
 						<button class="btnModifyComment btn btn-outline-primary btn-sm"
 							data-id="${comment.id}">수정</button>
-					</div>
-				</div>
-			`;
-			// modifiedTime은 바로 위에서 자바스크립트에서 쓸 수 있게 변환한 변수를 사용!
+					</div>`;
+				}
+				htmlStr += '</div>';
 		}
+			// modifiedTime은 바로 위에서 자바스크립트에서 쓸 수 있게 변환한 변수를 사용!
+		
 		// 작성된 HTML 코드를 div 영역에 삽입.
 		divComments.innerHTML = htmlStr;
 

@@ -48,11 +48,13 @@ uri="jakarta.tags.core"%>
 								></textarea>
 							</div>
 							<div class="mt-2">
+								<!-- 로그인 사용자 아이디를 author 입력 필드에 설정. -->
 								<input
-									class="form-control"
+									class="d-none"
 									type="text"
 									name="author"
-									placeholder="작성자"
+									value="${signedInUser}"
+									readonly
 									required
 								/>
 							</div>

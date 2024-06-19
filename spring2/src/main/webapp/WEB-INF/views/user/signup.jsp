@@ -34,10 +34,6 @@ uri="jakarta.tags.core"%>
              <input type="password" class="form-control" id="password" name="password" required placeholder="비밀번호 입력"/>
             </div>
             
-            <div class="my-2">
-              <input type="password" class="form-control" id="password" name="password" required placeholder="비밀번호 확인"/>
-            </div>
-            
             <!-- password 중복 체크 결과 표시할 영역 -->
              <div id="checkUseridResult"></div>
             
