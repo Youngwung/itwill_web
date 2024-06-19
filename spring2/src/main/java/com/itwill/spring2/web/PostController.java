@@ -14,6 +14,7 @@ import com.itwill.spring2.dto.PostListDto;
 import com.itwill.spring2.dto.PostSearchDto;
 import com.itwill.spring2.dto.PostUpdateDto;
 import com.itwill.spring2.repository.Post;
+import com.itwill.spring2.service.CommentService;
 import com.itwill.spring2.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 // -> PostController 클래스의 모든 컨트롤러 메서드의 매핑 주소는 "/post"로 시작.
 public class PostController {
   private final PostService postService;
+  private final CommentService commentService;
 
   @GetMapping("/list")
   public void list(Model model) {
@@ -98,6 +100,9 @@ public class PostController {
   public String delete(
       @RequestParam(name = "id") int id) {
     log.debug("delete(id={})", id);
+
+    // 댓글 서비스의 포스트에 달려있는 모든 댓글 삭제 메서드 호출
+    commentService.deleteByPostId(id);
 
     // 서비스 컴포넌트의 메서드를 호출해서 데이터베이스의 테이블에서 해당 아이디의 글을 삭제,
     postService.delete(id);

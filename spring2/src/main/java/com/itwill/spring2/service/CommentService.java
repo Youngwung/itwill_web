@@ -73,4 +73,10 @@ public class CommentService {
     return result;
   }
 
+  public int deleteByPostId(Integer postId) {
+    log.debug("deleteByPostId({})", postId);
+    int result = commentDao.deleteByPostId(postId);
+    return result;
+  }
+
 }

@@ -82,6 +82,7 @@ public class CommentRestController {
   // 댓글 수정
   public ResponseEntity<Integer> updateComment(@PathVariable(name = "id") int id, @RequestBody CommentUpdateDto dto) {
     log.debug("updateComment(id={}, dto = {})", id, dto);
+    dto.setId(id);
 
     int result = commentService.update(dto);
 

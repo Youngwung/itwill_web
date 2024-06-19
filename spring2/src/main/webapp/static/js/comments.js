@@ -32,7 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	// 클릭 이벤트 리스너 등록
 	btnRegisterComment.addEventListener("click", registerComment);
 	// 익명함수로 만들지 않고 함수를 하나 만듦. => 코드가 길어서 가독성이 안 좋아질 것을 우려
+	
+	   // 부트스트랩 모달(다이얼로그) 객체 생성.
+    const commentModal = new bootstrap.Modal('div#commentModal', {backdrop: true});
 
+		// 모달의 저장 버튼을 찾고, 클릭 이벤트 리스너를 설정.
+		const btnUpdateComment = document.querySelector('button#btnUpdateComment');
+		btnUpdateComment.addEventListener('click', updateComment);
+
+		// 회원가입 버튼을 찾고, 클릭 이벤트 리스너를 설정.
+		const btnSignup = document.querySelector('button#btnSignup');
+		btnSignup.addEventListener('click', signupDupCheck);
+
+/*  --------------------------------------------- */
 	// 댓글 등록 이벤트 리스너 콜백(함수):
 	function registerComment() {
 		// 댓글 등록할 떄 필요한 필드들을 모두 찾아야함.
@@ -161,10 +173,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		for (let btn of btnDeletes) {
 			btn.addEventListener('click', deleteComment);
 		}
-
-		// TODO: 모든 수정 버튼들을 찾아서 클릭 이벤트 리스너를 설정.
+		
+		// 모든 수정 버튼들을 찾아서 클릭 이벤트 리스너를 설정
+		const btnModifies = document.querySelectorAll('button.btnModifyComment');
+		for (let btn of btnModifies){
+      btn.addEventListener('click', showCommentModal);
+    }
+    
 
 	}
+
+
+	
 
 	function deleteComment(event) {
 		// 이벤트 리스너 콜백의 아규먼트 event 객체는 target 속성을 가지고 있음.
@@ -195,6 +215,65 @@ document.addEventListener("DOMContentLoaded", () => {
 			.catch((error) => {
 				console.log(error);
 			});
+	}
+	
+	
+	function showCommentModal(event) {
+    // 이벤트 타겟(수정 버튼)의 data-id 속성 값을 읽음.
+    const id = event.target.getAttribute('data-id');
+    
+    // Ajax 요청을 보내서 댓글 아이디로 검색.
+    const uri = `../api/comment/${id}`
+    axios
+    .get(uri)
+    .then((response) => {
+      console.log(response.data);
+      const ctext = response.data.ctext;
+      
+      // 모달의 input(댓글 번호), textarea(댓글 내용)를 채움.
+      document.querySelector('input#modalCommentId').value=id;
+      document.querySelector('textarea#modalCommentText').value=ctext;
+      commentModal.show();
+    })
+    .catch((error) => {console.log(error);});
+  }
+	
+	// 업데이트 모달 창의 [저장] 버튼의 클릭 이벤트 리스너
+	function updateComment() {
+		// 업데이트할 댓글 번호
+		const id = document.querySelector('input#modalCommentId').value;
+
+		// 업데이트할 댓글 내용
+		const ctext = document.querySelector('textarea#modalCommentText').value;
+		if(ctext==='') { // 댓글 내용이 비워져있을 때
+			alert('업데이트할 댓글 내용을 입력해주세요.');
+			return; //이벤트 리스너를 종료
+		}
+
+		// 댓글 업데이트 요청 REST API URI
+		const uri = `../api/comment/${id}`;
+		
+		axios
+		.put(uri, {ctext}) // {ctext} = {ctext : ctext}
+		.then((response) => {
+			console.log(response);
+			const result = confirm('수정하시겠습니까?');
+			if (!result) {
+				return;
+			}
+			// 댓글 목록 갱신
+			getAllComments();
+			// 모달 숨김
+			commentModal.hide();
+		})
+		.catch((error) => {console.log(error);});
+
+	}
+
+	// 아이디 중복 확인, 비밀번호 일치 확인
+	function signupDupCheck() {
+		console.log('됨?');
+		btnSignup.confirm('왜');
 	}
 
 });
