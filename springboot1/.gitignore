@@ -1,17 +1,6 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,java
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,java
+# Created by https://www.toptal.com/developers/gitignore/api/gradle,eclipse,visualstudiocode,windows,java
+# Edit at https://www.toptal.com/developers/gitignore?templates=gradle,eclipse,visualstudiocode,windows,java
 
-### Java ###
-# Compiled class file
-*.class
-*.classpath
-*.project
-*/.settings or */.settings/**
-.settings
-target/*
-Servers/*
-*/target/**
-*/build/**
 ### Eclipse ###
 .metadata
 bin/
@@ -77,6 +66,12 @@ local.properties
 ### Eclipse Patch ###
 # Spring Boot Tooling
 .sts4-cache/
+
+### Java ###
+# Compiled class file
+*.class
+*.classpath
+*.project
 
 # Log file
 *.log
@@ -145,5 +140,31 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-/target/
-# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,java
+### Gradle ###
+.gradle
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+### Gradle Patch ###
+# Java heap dump
+*.hprof
+
+# End of https://www.toptal.com/developers/gitignore/api/gradle,eclipse,visualstudiocode,windows,java
