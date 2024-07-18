@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+a ? A : B
+<head>
+	<meta charset="UTF-8">
+	<title>Spring Boot 1</title>
+</head>
+
+<body>
+	<!-- templates/layout/fragments.html 파일의 myHeader 프래그먼트 끼워넣기 -->
+<div th:replace="~{/layout/fragments :: myHeader('도서 목록 페이지')}"></div>
+
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>제목</th>
+			<th>저자</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="book : ${bookList}" th:object="${book}">
+			<td th:text="*{id}"></td>
+			<td th:text="*{title}"></td>
+			
+			<td th:if="${book.author == null}">작가없음</td>
+			<td th:unless="${book.author == null}" th:text="|*{author.firstName} *{author.lastName}|"/>
+		</tr>
+	</tbody>
+</table>
+
+</body>
+
+</html>
