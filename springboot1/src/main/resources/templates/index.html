@@ -17,16 +17,15 @@
 
 	<!-- fragment expression:
 	  templates/layout/fragments.html 에서 선언된 navigation 프래그먼트 끼워넣기.
-		div 안에 프래그먼트를 삽입하는 방식.-->	
-		<div th:insert="~{/layout/fragments :: navigation}"></div>
+		div 안에 프래그먼트를 삽입하는 방식.-->
+	<div th:insert="~{/layout/fragments :: navigation}"></div>
 
-	<h1>첫 번째 Spring Boot 프로젝트</h1>
 	<h1>첫 번째 Spring Boot 프로젝트</h1>
 	<h2 th:text="${currentTime}"></h2>
 	<h2 th:text="${book}"></h2>
 	<h2 th:text="${book.author}"></h2>
 	<div>
-		ID: <sapn th:text="${book.id}"></sapn>
+		ID: <span th:text="${book.id}"></span>
 		<br>
 		제목: <span th:text="${book.title}"></span>
 		<br>
@@ -34,7 +33,7 @@
 	</div>
 	<br>
 	<!-- selection expression -->
-	 <!-- book객체를 계속 사용하여 반복되어 쓰는게 귀찮을 떄 쓰는 문법 -->
+	<!-- book객체를 계속 사용하여 반복되어 쓰는게 귀찮을 떄 쓰는 문법 -->
 	<div th:object="${book}">
 		ID: <span th:text="*{id}" />
 		<br>
@@ -50,6 +49,27 @@
 				<!-- thymeleaf link(URL) expression
 				 			JSTL의 c:url 태그와 비슷한 기능. -->
 				<a th:href="@{/book/list}">도서 목록</a>
+			</li>
+			<li>
+				<!-- 질의문자열(query string)을 포함하는 URL 작성 방법: -->
+				<!-- 방법 1: 직접 URL에 추가하기 => 특수문자가 들어갈 경우 정상작동하지 않음. -->
+				<!-- <a th:href="@{/book/details?id=1}">도서1 상세 페이지</a> -->
+				<!-- 방법 2: 아규먼트로 전달하기 -->
+				<a th:href="@{/book/details(id=1)}">도서1 상세페이지</a>
+				<!-- 쿼리스트링이 여러개인 경우 -->
+				<a th:href="@{/book/details(id=1, title='종의 기원')}">쿼리스트링 2개</a>
+			</li>
+
+			<li>
+				<!-- path variable을 포함하는 URL expression 작성 방법 -->
+				<!-- path variable: 검색창의 일부를 변수로 사용.  -->
+
+				<!-- 방법1: 직접 작성 -->
+				<!-- <a th:href="@{/book/details/} + 2">도서 상세 페이지</a> -->
+				<a th:href="@{/book/details/{id}(id=2)}">도서 상세 페이지</a>
+				<!-- 질의문자열과 PathVariable 동시에 사용하기 -->
+				<!-- <a th:href="@{/book/{id}/details(id=2, category='소설')}">도서 상세 페이지</a> -->
+				<!-- ==> /book/2/details?category=소설 -->
 			</li>
 		</ul>
 	</nav>

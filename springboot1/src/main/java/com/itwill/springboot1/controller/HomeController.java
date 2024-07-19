@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.springboot1.dto.Author;
 import com.itwill.springboot1.dto.Book;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 
 
@@ -56,6 +59,37 @@ public class HomeController {
 		
 		// 도서 목록을 뷰에 전달.
 		model.addAttribute("bookList", list);
+	}
+	
+	@GetMapping("/book/details")
+	public void bookDetails(@RequestParam(name="id") int id, Model model) {
+		// 요청 파라미터 id 값을 찾고, 해당 id를 갖는 Book 객체를 만듦.
+		log.info("details(id = {})", id);
+		Book book = Book.builder().id(id).title(id + " 제목")
+		.author(Author.builder().firstName(id+"").lastName("의 작가").build()).build();
+		model.addAttribute("book", book);
+		// 모델에 Book 객체를 속성(attr)으로 저장. 뷰로 전달
+	}
+
+	// path variable을 포함하는 요청을 처리하는 메서드.
+	@GetMapping("/book/details/{id}")
+	// PathVariable 매핑 주소 작성
+	public String bookDetails2(@PathVariable(name="id") int id, Model model) {
+		// PathVariable을 아규먼트로 받음. 애너테이션의 속성값은 주소의 변수이름과 같아야함.
+		log.info("bookDetails2(id = {})", id);
+		// PathVariable로 전달받은 id로 book객체 생성
+		Book book = Book.builder().id(id).title(id + " 제목")
+		.author(Author.builder().firstName(id+"").lastName("의 작가").build()).build();
+		// model로 뷰에 전달.
+		model.addAttribute("book", book);
+		// 쿼리스트링 처리 메서드에서 전달한 변수와 같은 이름으로 보냄.
+		
+		// ==> 다른 변수로 하면 details.html에서 book객체가 없어서 에러뜸.
+		// 요청주소에 따라 다른 방법으로 모델을 전달하는 거임.
+
+		// void로 사용 시 뒤에 id.html을 주소로 사용함.
+		// 모든 id에 대해 html파일을 만들 수 없으므로 String으로 명확한 html을 찾아주어야함.
+		return "/book/details";
 	}
 	
 	

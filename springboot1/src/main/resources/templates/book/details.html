@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Spring Boot</title>
+</head>
+
+<body>
+	<header th:replace="~{/layout/fragments :: myHeader('도서 상세 페이지')}"></header>
+	<div th:object="${book}">
+		ID: <span th:text="*{id}"></span>
+		<br>
+		TITLE: <span th:text="*{title}"></span>
+		<br>
+		AUTHOR: <span th:text="*{author != null} ? |*{author.firstName} *{author.lastName}| : 'Unknown'"></span>
+	</div>
+
+</body>
+
+</html>

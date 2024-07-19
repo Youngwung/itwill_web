@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-a ? A : B
 <head>
 	<meta charset="UTF-8">
 	<title>Spring Boot 1</title>
@@ -22,9 +21,12 @@ a ? A : B
 		<tr th:each="book : ${bookList}" th:object="${book}">
 			<td th:text="*{id}"></td>
 			<td th:text="*{title}"></td>
-			
-			<td th:if="${book.author == null}">작가없음</td>
-			<td th:unless="${book.author == null}" th:text="|*{author.firstName} *{author.lastName}|"/>
+			<td th:text="*{author != null} ? |*{author.firstName}| : 'Unknown'"></td>
+			<!-- 조건식 ? (참일 떄 실행함) : (거짓일 때 실행함) -->
+			<!-- <=선생님방법   내 방법=> -->
+			<!-- <td th:if="${book.author == null}">작가없음</td>
+			<td th:unless="${book.author == null}" th:text="|*{author.firstName} *{author.lastName}|"/> -->
+
 		</tr>
 	</tbody>
 </table>
