@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<div th:replace="~{layout/fragments :: pageHeader('부서 목록')}"></div>
+	<table>
+		<thead>
+			<tr>
+				<th>부서 번호</th>
+				<th>부서 이름</th>
+				<th>부서 위치</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="dept : ${dept}" th:object="${dept}">
+				<td>
+					<a th:text="*{id}" th:href="@{/department/detail(id=*{id})}"></a>
+				</td>
+				<td>
+					<a th:text="*{dname}" th:href="@{/department/detail(id=*{id})}"></a>
+				</td>
+				<td th:text="*{location}">
+					<a></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

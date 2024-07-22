@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Spring Boot 2</title>
+</head>
+
+<body>
+	<div th:replace="~{/layout/fragments :: pageHeader('직원 목록 페이지')}"></div>
+	<table>
+		<thead>
+			<tr>
+				<th>사번</th>
+				<th>이름</th>
+				<th>직무</th>
+				<th>매니저</th>
+				<th>입사일</th>
+				<th>급여</th>
+				<th>수당</th>
+				<th>부서</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 
+			모델에서 employees를 가져와서 하나씩 꺼내 emp에 저장.
+			emp를 생략해서 사용 가능하도록 오브젝트에 등록
+			-->
+			<tr th:each="emp : ${employees}" th:object="${emp}">
+				<td>
+					<a th:text="*{id}" th:href="@{/employee/detail(id=*{id})}"></a>
+				</td>
+				<td>
+					<a th:text="*{ename}" th:href="@{/employee/detail(id=*{id})}"></a>
+				</td>
+				<td th:text="*{job}">
+
+				</td>
+				<td>
+					<!-- div같은애인데 공간안먹음: 타임리프 문법 쓰기 위한 공간 만들기 좋음 -->
+					<th:block th:if="*{manager != null}">
+						<a th:text="*{manager.ename}" th:href="@{/employee/detail(id=*{manager.id})}"></a>
+					</th:block>
+				</td>
+				<td th:text="*{hiredate}"></td>
+				<td th:text="*{salary}"></td>
+				<td th:text="*{commission}"></td>
+				<td>
+					<a th:text="*{department.dname}" th:href="@{/department/detail(id=*{department.id})}"></a>
+				</td>
+
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
