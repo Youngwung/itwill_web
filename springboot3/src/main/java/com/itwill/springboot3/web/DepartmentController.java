@@ -2,6 +2,8 @@ package com.itwill.springboot3.web;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.springboot3.domain.Department;
+import com.itwill.springboot3.dto.EmployeeListItemDto;
 import com.itwill.springboot3.service.DepartmentService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,10 +28,12 @@ public class DepartmentController {
 
 	@Transactional
 	@GetMapping("/list")
-	public void deptList(Model model) {
+	public void deptList(
+				@RequestParam(name="p", defaultValue = "0") int pageNo, 
+				Model model) {
 		log.info("list()");
-		List<Department> deptList = deptServ.read();
-		model.addAttribute("deptList", deptList);
+		Page<Department> deptList = deptServ.read(pageNo, Sort.by("id"));
+		model.addAttribute("page", deptList);
 	}
 
 	@Transactional
@@ -37,6 +42,8 @@ public class DepartmentController {
 		log.info("detail()");
 		Department dept = deptServ.read(id);
 		model.addAttribute("dept", dept);
+		List<EmployeeListItemDto> emps = deptServ.readByDeptid(id);
+		model.addAttribute("emps", emps);
 	}
 
 }
