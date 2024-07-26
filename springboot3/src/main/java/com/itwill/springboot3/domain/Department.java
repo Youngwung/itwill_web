@@ -8,6 +8,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +21,10 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+// 생성자를 private으로 감춤.
+// 외부에서 변경하지 못하게 setter를 만들 지 않는 이유와 같음.
+@Builder
 @Table(name = "DEPARTMENTS")
 public class Department {
 	@Id

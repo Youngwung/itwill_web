@@ -20,8 +20,8 @@
       </thead>
       <tbody class="table-group-divider">
         <tr th:each="dept : ${page}" th:object="${dept}">
-          <td><a th:text="*{id}" th:href="@{/department/detail(id=*{id})}"></a></td>
-          <td><a th:text="*{dname}" th:href="@{/department/detail(id=*{id})}"></a></td>
+          <td><a th:text="*{id}" th:href="@{/department/detail/{id}(id=*{id})}"></a></td>
+          <td><a th:text="*{dname}" th:href="@{/department/detail/{id}(id=*{id})}"></a></td>
           <td>
             <th:block th:if="*{manager != null}">
               <a th:text="*{manager.firstName}+ ' ' + *{manager.lastName}"
@@ -34,31 +34,8 @@
     </table>
   </main>
 
-  <footer>
-    <div class="mt-2">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" th:classappend="${!page.hasPrevious} ? 'disabled'">
-          <a class="page-link" th:href="@{|?p=${page.number - 1}|}">이전</a>
-        </li>
-
-        <li class="page-item" th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
-          th:if="${(pageNo >= page.number - 3) && (pageNo < page.number + 3)}"
-          th:classappend="${pageNo == page.number} ? 'active'">
-          <!-- th:each ==>page객체의 총 페이지 개수를 가져온다.
-              가져올 때 index는 0부터 시작하므로 (-1)해서 페이지 개수와 일치시킨다. -->
-          <!-- th:if ===>5 숫자의 의미:
-                  현재 페이지를 기준으로 한 화면에 최대 5개의 페이지 개수만 보여주게 만들어줌. -->
-          <!-- th:classappend ===> ${조건} ? '속성' ==> 조건을 만족하면 해당 태그의 클래스에 '속성'을 추가함. -->
-          <a class="page-link" th:text="${pageNo} + 1" th:href="@{|?p=${pageNo}|}"></a>
-        </li>
-
-        <li class="page-item" th:classappend="${!page.hasNext} ? 'disabled'">
-          <a class="page-link" th:href="@{|?p=${page.number + 1}|}">다음</a>
-        </li>
-      </ul>
-    </div>
-  </footer>
-
+  <!-- 페이지 fragment -->
+  <th:block th:replace="~{/layout/fragments :: pagination}"></th:block>
   <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
 </body>
 
