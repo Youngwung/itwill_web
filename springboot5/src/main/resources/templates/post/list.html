@@ -24,15 +24,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="post : ${posts}" th:object="${post}">
+						<tr th:each="post : ${page}" th:object="${post}">
 							<td th:text="*{id}"></td>
-							<td th:text="*{title}"></td>
+							<td>
+								<!-- query string request parameter 방식 요청 주소 -->
+								<a th:text="*{title}" th:href="@{/post/details(id=*{id})}"></a>
+								<!-- path variable 방식 요청 주소 -->
+								<!-- <a th:text="*{title}" th:href="@{/post/details/{id}(id=*{id})}"></a> -->
+							</td>
 							<td th:text="*{author}"></td>
 							<!-- <td th:text="*{modifiedTime}"></td> -->
 							<td th:text="*{#temporals.format(modifiedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
 						</tr>
 					</tbody>
 				</table>
+
+				<!-- 페이징 fragment 불러오기 -->
+				<th:block th:replace="~{/layout/fragments :: pagination}"></th:block>
+				
 			</div>
 		</div>
 	</main>

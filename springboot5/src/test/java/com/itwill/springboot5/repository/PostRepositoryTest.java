@@ -4,6 +4,7 @@ package com.itwill.springboot5.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -69,6 +70,21 @@ public class PostRepositoryTest {
 	@Test
 	public void testDelete() {
 		postRepo.deleteById(1L); // 리턴 타입 void임.
+	}
+
+	@Test
+	public void makeDummyData() {
+		List<Post> data = new ArrayList<>();
+		for(int i = 1; i <= 50; i++) {
+			Post post = Post.builder()
+										.title("Dummy Title #"+i)
+										.content("dummy content #" + i)
+										.author("admin")
+										.build();
+			data.add(post);
+		}
+		postRepo.saveAll(data);
+		// 아규먼트 타입 => Iterable(반복 가능한 타입)
 	}
 	
 }
