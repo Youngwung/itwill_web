@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
 import com.itwill.springboot5.dto.PostListItemDto;
+import com.itwill.springboot5.dto.PostSearchRequestDto;
 import com.itwill.springboot5.dto.PostUpdateDto;
 import com.itwill.springboot5.repository.PostRepository;
 
@@ -95,5 +96,23 @@ public class PostService {
 		// !주의: update 쿼리를 자동으로 실행하고 싶다면
 		// ! 객체를 변경하기 전에 select 쿼리를 실행해야함
 		// * 우리는 findById로 검색을 했음.
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Post> search(PostSearchRequestDto dto) {
+		log.info("search(dto = {})",dto);
+		Pageable pageable = PageRequest.of(dto.getP(), 10, Sort.by("id").descending());
+		Page<Post> page = null;
+		if(dto.getCategory().equals("t")) {
+			page = postRepo.findByTitleContainingIgnoreCase(dto.getKeyword(), pageable);
+		} else if(dto.getCategory().equals("c")) {
+			page = postRepo.findByContentContainingIgnoreCase(dto.getKeyword(), pageable);
+		} else if(dto.getCategory().equals("tc")) {
+			page = postRepo.findByTitleOrContent(dto.getKeyword(), pageable);
+		} else if (dto.getCategory().equals("a")) {
+			page = postRepo.findByAuthorContainingIgnoreCase(dto.getKeyword(), pageable);
+		}
+		log.info("page = {}", page);
+		return page;
 	}
 }

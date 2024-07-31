@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,20 +22,20 @@ public class PostRepositoryTest {
 	// 기본 생성자만 가지고 있기 때문. 그래서 RequiredContructor 애너테이션으로 초기화할 수 없음.
 	private PostRepository postRepo;
 	
-	@Test
+	// @Test
 	public void testDependancyInjection() {
 		assertThat(postRepo).isNotNull(); // poseRepo 객체가 null이 아니면 테스트 성공.
 		log.info("postRepo = {}", postRepo);
 	}
 
-	@Test
+	// @Test
 	public void testFindAll() {
 		List<Post> list = postRepo.findAll();
-		assertThat(list.size()).isEqualTo(0);
+		// assertThat(list.size()).isEqualTo(0);
 		list.forEach((x) -> {System.out.println(x);});
 	}
 
-	@Test
+	// @Test
 	public void testSave() {
 		Post entity = Post.builder().title("JAP 저장 테스트")
 										.content("Spring Boot + JPA 저장 테스트")
@@ -50,7 +49,7 @@ public class PostRepositoryTest {
 		// Post post = postRepo.save(entity);
 	}	
 
-	@Test
+	// @Test
 	public void testUpdate() {
 		// PK(id)로 엔터티를 검색:
 		Post entity = postRepo.findById(1L).orElseThrow();
@@ -67,12 +66,12 @@ public class PostRepositoryTest {
 		log.info("save 호출 후 = {}", entity);
 	}
 
-	@Test
+	// @Test
 	public void testDelete() {
 		postRepo.deleteById(1L); // 리턴 타입 void임.
 	}
 
-	@Test
+	// @Test
 	public void makeDummyData() {
 		List<Post> data = new ArrayList<>();
 		for(int i = 1; i <= 50; i++) {

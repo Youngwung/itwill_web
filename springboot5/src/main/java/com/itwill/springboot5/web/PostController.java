@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
 import com.itwill.springboot5.dto.PostListItemDto;
+import com.itwill.springboot5.dto.PostSearchRequestDto;
 import com.itwill.springboot5.dto.PostUpdateDto;
 import com.itwill.springboot5.service.PostService;
 
@@ -84,6 +85,17 @@ public class PostController {
 		return "redirect:/post/details?id="+dto.getId();
 		// 수정한 글의 상세보기 페이지로 이동
 	}
+
+	@GetMapping("/search")
+	public String search(PostSearchRequestDto dto, Model model) {
+		log.info("search(dto={})", dto);
+
+		// 서비스 메서드 호출
+		Page<Post> page = postServ.search(dto);
+		model.addAttribute("page", page);
+		return "post/list";
+	}
+	
 	
 	
 	
