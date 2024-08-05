@@ -39,6 +39,9 @@ public class PostController {
 		log.info("list() = {}", list.getContent());
 		model.addAttribute("page", list);
 		// 페이징 처리를 했다는 표시로 전달하는 데이터의 이름을 page로 변경
+
+		// pagination fragment에서 사용하기 위한 현재 요청 주소 정보
+		model.addAttribute("baseUrl", "/post/list");
 	}
 
 	@GetMapping("/create")
@@ -93,6 +96,7 @@ public class PostController {
 		// 서비스 메서드 호출
 		Page<Post> page = postServ.search(dto);
 		model.addAttribute("page", page);
+		model.addAttribute("baseUrl", "/post/search");
 		return "post/list";
 	}
 	

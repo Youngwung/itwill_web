@@ -51,11 +51,11 @@
 							th:classappend="${!page.hasPrevious} ? 'disabled'">
 						<!-- 이전 페이지가 존재하지 않으면 비활성화 -->
 						<a class="page-link"
-								th:href="@{|?p=${page.number - 1}|}">이전</a>
+								th:href="@{${baseUrl}(p=${page.number - 1}, category=${param.category}, keyword=${param.keyword})}">이전</a>
 								<!-- 요청 주소의 요청파라미터를 현재 페이지 번호 - 1로 변경 -->
 					</li>
 					<li class="page-item"
-							th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
+							th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1, 1)}"
 							th:if="${pageNo >= page.number -5 && pageNo < page.number + 5}"
 							th:classappend="${pageNo == page.number} ? 'active'">
 						<!-- numbers의 sequence 메서드를 호출
@@ -64,7 +64,7 @@
 						<!-- 현재 페이지를 강조하는 코드 -->
 											
 						<a class="page-link"
-								th:href="@{|?p=${pageNo}|}"
+								th:href="@{${baseUrl}(p=${pageNo}, category=${param.category}, keyword=${param.keyword})}"
 								th:text="${pageNo + 1}"></a>
 								<!-- 요청파라미터로 요청주소 설정 -->
 								<!-- 페이지 번호 표시: pageNo는 0부터 시작하므로 + 1해줌. -->
@@ -72,7 +72,7 @@
 					<li class="page-item"
 								th:classappend="${!page.hasNext} ? 'disabled'">
 						<a class="page-link"
-								th:href="@{|?p=${page.number + 1}|}">다음</a>
+								th:href="@{${baseUrl}(p=${page.number + 1}, category=${param.category}, keyword=${param.keyword})}">다음</a>
 					</li>
 				</ul>
 			</nav>
