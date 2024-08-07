@@ -34,9 +34,23 @@
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/post/create}">새 포스트</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled" aria-disabled="true">Disabled</a>
-						</li>
+						<th:block sec:authorize="isAnonymous()"><!-- 로그인 안 된 상태 -->
+							<li class="nav-item">
+								<a th:href="@{/member/signin}" class="nav-link">로그인</a>
+							</li>
+							<li class="nav-item">
+								<a th:href="@{/member/signup}" class="nav-link">회원 가입</a>
+							</li>
+						</th:block>
+						<th:block sec:authorize="isAuthenticated()"> <!-- 로그인 된 상태 -->
+							<li class="nav-item">
+								<!-- spring security에서 로그아웃 기능이 구현된 요청 주소 -->
+								<a th:href="@{/logout}" class="nav-link"><!-- /logout은 스프링 시큐리티에서 제공하는 기본 로그아웃 주소 -->
+									<span class="text-secondary" sec:authentication="name"></span><!-- 로그인 된 유저의 아이디를 보여줌. -->
+									<span class="mx-1 text-primary">로그아웃</span>
+								</a> 
+							</li>
+						</th:block>
 					</ul>
 				</div>
 			</div>
@@ -45,37 +59,34 @@
 
 	<!-- 페이징 처리 -->
 	<th:block th:fragment="pagination">
-			<nav>
-				<ul class="pagination justify-content-center">
-					<li class="page-item"
-							th:classappend="${!page.hasPrevious} ? 'disabled'">
-						<!-- 이전 페이지가 존재하지 않으면 비활성화 -->
-						<a class="page-link"
-								th:href="@{${baseUrl}(p=${page.number - 1}, category=${param.category}, keyword=${param.keyword})}">이전</a>
-								<!-- 요청 주소의 요청파라미터를 현재 페이지 번호 - 1로 변경 -->
-					</li>
-					<li class="page-item"
-							th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1, 1)}"
-							th:if="${pageNo >= page.number -5 && pageNo < page.number + 5}"
-							th:classappend="${pageNo == page.number} ? 'active'">
-						<!-- numbers의 sequence 메서드를 호출
+		<nav>
+			<ul class="pagination justify-content-center">
+				<li class="page-item" th:classappend="${!page.hasPrevious} ? 'disabled'">
+					<!-- 이전 페이지가 존재하지 않으면 비활성화 -->
+					<a class="page-link"
+						th:href="@{${baseUrl}(p=${page.number - 1}, category=${param.category}, keyword=${param.keyword})}">이전</a>
+					<!-- 요청 주소의 요청파라미터를 현재 페이지 번호 - 1로 변경 -->
+				</li>
+				<li class="page-item" th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1, 1)}"
+					th:if="${pageNo >= page.number -5 && pageNo < page.number + 5}"
+					th:classappend="${pageNo == page.number} ? 'active'">
+					<!-- numbers의 sequence 메서드를 호출
 											페이지 개수만큼 반복되는 코드가 됨. -->
-						<!-- 페이지의 개수를 조절하는 if 문 -->
-						<!-- 현재 페이지를 강조하는 코드 -->
-											
-						<a class="page-link"
-								th:href="@{${baseUrl}(p=${pageNo}, category=${param.category}, keyword=${param.keyword})}"
-								th:text="${pageNo + 1}"></a>
-								<!-- 요청파라미터로 요청주소 설정 -->
-								<!-- 페이지 번호 표시: pageNo는 0부터 시작하므로 + 1해줌. -->
-					</li>
-					<li class="page-item"
-								th:classappend="${!page.hasNext} ? 'disabled'">
-						<a class="page-link"
-								th:href="@{${baseUrl}(p=${page.number + 1}, category=${param.category}, keyword=${param.keyword})}">다음</a>
-					</li>
-				</ul>
-			</nav>
+					<!-- 페이지의 개수를 조절하는 if 문 -->
+					<!-- 현재 페이지를 강조하는 코드 -->
+
+					<a class="page-link"
+						th:href="@{${baseUrl}(p=${pageNo}, category=${param.category}, keyword=${param.keyword})}"
+						th:text="${pageNo + 1}"></a>
+					<!-- 요청파라미터로 요청주소 설정 -->
+					<!-- 페이지 번호 표시: pageNo는 0부터 시작하므로 + 1해줌. -->
+				</li>
+				<li class="page-item" th:classappend="${!page.hasNext} ? 'disabled'">
+					<a class="page-link"
+						th:href="@{${baseUrl}(p=${page.number + 1}, category=${param.category}, keyword=${param.keyword})}">다음</a>
+				</li>
+			</ul>
+		</nav>
 	</th:block>
 
 	<!-- 부트스트랩 자바스크립트파일 불러오기 -->

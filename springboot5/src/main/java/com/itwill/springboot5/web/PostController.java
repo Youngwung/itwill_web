@@ -2,6 +2,7 @@ package com.itwill.springboot5.web;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,11 +45,14 @@ public class PostController {
 		model.addAttribute("baseUrl", "/post/list");
 	}
 
+	// @PreAuthorize("isAthenticated()") //-> role에 상관없이 아이디/비밀번호로만 인증.
+	@PreAuthorize("hasRole('USER')") //-> role이 일치하는 아이디/비밀번호 인증.
 	@GetMapping("/create")
 	public void create() {
 		log.info("getCreate()");
 	}
 	
+	@PreAuthorize("hasRole('USER')") //-> role이 일치하는 아이디/비밀번호 인증.
 	@PostMapping("/create")
 	public String create(PostCreateDto dto) {
 		log.info("postCreate(): {}", dto);
@@ -58,6 +62,7 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 
+	@PreAuthorize("hasRole('USER')") //-> role이 일치하는 아이디/비밀번호 인증.
 	@GetMapping({"/details", "modify"})
 	// 처리하는 주소를 배열로 설정할 수 있음.
 	public void details(@RequestParam(name="id") Long id, Model model) {
@@ -71,6 +76,7 @@ public class PostController {
 		// 요청 주소가 modify인 경우 modify.html을 찾아감.
 	}
 
+	@PreAuthorize("hasRole('USER')") //-> role이 일치하는 아이디/비밀번호 인증.
 	@GetMapping("/delete")
 	public String delete(@RequestParam(name = "id") Long id) {
 		log.info("delete(id = {})", id);
@@ -79,6 +85,7 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 
+	@PreAuthorize("hasRole('USER')") //-> role이 일치하는 아이디/비밀번호 인증.
 	@PostMapping("/update")
 	public String update(PostUpdateDto dto) {
 		log.info("PostUpdateDto(dto = {})", dto);
