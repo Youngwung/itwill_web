@@ -35,7 +35,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="card-footer mt-2 d-flex justify-content-end">
+		<div class="card-footer mt-2 d-flex justify-content-end" th:if="*{author eq #authentication.name}">
 			<!-- 버튼을 우측 정렬 하는 방법: d-flex justify -->
 			<button id="btnDelete" class="mx-2 btn btn-outline-danger">삭제</button>
 			<button id="btnUpdate" class="mx-2 btn btn-outline-primary">업데이트</button>

@@ -1,9 +1,14 @@
 package com.itwill.springboot5.domain;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.NaturalId;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -31,7 +36,7 @@ import lombok.ToString;
 @Getter @ToString(callSuper = true) @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 // onlyExplicitlyIncluded 속성: @EqualsAndHashCode.Include 애너테이션이 설정된 필드만 사용할 건지 설정
 // callSuper 속성: superclass의 equals(), hashCode() 메서드를 사용할 것인 지 여부.
-public class Member extends BaseTimeEntity {
+public class Member extends BaseTimeEntity implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,6 +96,22 @@ public class Member extends BaseTimeEntity {
 	public Member clearRoles() {
 		roles.clear(); // Set<>이 가지고 있는 모든 원소를 지움.
 		return this;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		//! 람다표현식을 사용하지 않는 방법
+		// ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+		// for(MemberRole r : roles) {
+		// 	GrantedAuthority auth = new SimpleGrantedAuthority(r.getAuthority());
+		// 	authorities.add(auth);
+		// }
+
+		//! 람다표현식을 사용한 방법
+		List<SimpleGrantedAuthority> authorities = roles.stream().map((r) -> new SimpleGrantedAuthority(r.getAuthority())).toList();
+
+		return authorities;
 	}
 
 }
